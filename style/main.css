@@ -18,11 +18,32 @@ body {
 h1.title {
   max-width: 1px;
   white-space: nowrap;
-  font-size: 50px;
+  font-size: 25px;
   font-weight: bold;
-  margin: 25px 0 0 0;
+  margin: 0;
   display: block;
   float: left; }
+
+h1.title .titlea {
+  font-size: 25px; }
+
+h1.title .titleb {
+  font-size: 30px; }
+
+h1.title .title0 {
+  font-size: 35px; }
+
+h1.title .title1 {
+  font-size: 40px; }
+
+h1.title .title2 {
+  font-size: 45px; }
+
+h1.title .title3 {
+  font-size: 50px; }
+
+h1.title .title4 {
+  font-size: 55px; }
 
 @-webkit-keyframes move-up {
   0% {
@@ -206,8 +227,7 @@ hr {
       display: block; }
 
 .grid-container {
-  position: relative;
-  overflow: hidden;
+  position: absolute;
   z-index: 1; }
 
 .grid-row {
@@ -229,15 +249,6 @@ hr {
   .grid-cell:last-child {
     margin-right: 0; }
 
-.grid-cell-x {
-  width: 106.25px;
-  height: 106.25px;
-  position: absolute;
-  border-radius: 3px;
-  background: rgba(238, 228, 218, 0.35); }
-  .grid-cell:last-child {
-    margin-right: 0; }
-
 .tile-container {
   position: absolute;
   z-index: 2; }
@@ -246,6 +257,10 @@ hr {
   width: 107px;
   height: 107px;
   line-height: 116.25px; }
+.tile.tile-position-1-0 {
+  -webkit-transform: translate(0px, -121px);
+  -moz-transform: translate(0px, -121px);
+  transform: translate(0px, -121px); }
 .tile.tile-position-1-1 {
   -webkit-transform: translate(0px, 0px);
   -moz-transform: translate(0px, 0px);
@@ -262,6 +277,10 @@ hr {
   -webkit-transform: translate(0px, 363px);
   -moz-transform: translate(0px, 363px);
   transform: translate(0px, 363px); }
+.tile.tile-position-2-0 {
+  -webkit-transform: translate(121px, -121px);
+  -moz-transform: translate(121px, -121px);
+  transform: translate(121px, -121px); }
 .tile.tile-position-2-1 {
   -webkit-transform: translate(121px, 0px);
   -moz-transform: translate(121px, 0px);
@@ -278,6 +297,10 @@ hr {
   -webkit-transform: translate(121px, 363px);
   -moz-transform: translate(121px, 363px);
   transform: translate(121px, 363px); }
+.tile.tile-position-3-0 {
+  -webkit-transform: translate(242px, -121px);
+  -moz-transform: translate(242px, -121px);
+  transform: translate(242px, -121px); }
 .tile.tile-position-3-1 {
   -webkit-transform: translate(242px, 0px);
   -moz-transform: translate(242px, 0px);
@@ -294,6 +317,10 @@ hr {
   -webkit-transform: translate(242px, 363px);
   -moz-transform: translate(242px, 363px);
   transform: translate(242px, 363px); }
+.tile.tile-position-4-0 {
+  -webkit-transform: translate(363px, -121px);
+  -moz-transform: translate(363px, -121px);
+  transform: translate(363px, -121px); }
 .tile.tile-position-4-1 {
   -webkit-transform: translate(363px, 0px);
   -moz-transform: translate(363px, 0px);
@@ -516,8 +543,29 @@ hr {
   h1.title {
     max-width: 1px;
     white-space: nowrap;
-    font-size: 27px;
+    font-size: 12px;
     margin-top: 15px; }
+
+  h1.title .titlea {
+    font-size: 12px; }
+
+  h1.title .titleb {
+    font-size: 14px; }
+
+  h1.title .title0 {
+    font-size: 16px; }
+
+  h1.title .title1 {
+    font-size: 18px; }
+
+  h1.title .title2 {
+    font-size: 20px; }
+
+  h1.title .title3 {
+    font-size: 22px; }
+
+  h1.title .title4 {
+    font-size: 24px; }
 
   .container {
     width: 280px;
@@ -592,8 +640,7 @@ hr {
         display: block; }
 
   .grid-container {
-    position: relative;
-    overflow: hidden;
+    position: absolute;
     z-index: 1; }
 
   .grid-row {
@@ -623,6 +670,10 @@ hr {
     width: 58px;
     height: 58px;
     line-height: 67.5px; }
+  .tile.tile-position-1-0 {
+    -webkit-transform: translate(0px, -67px);
+    -moz-transform: translate(0px, -67px);
+    transform: translate(0px, -67px); }
   .tile.tile-position-1-1 {
     -webkit-transform: translate(0px, 0px);
     -moz-transform: translate(0px, 0px);
@@ -639,6 +690,10 @@ hr {
     -webkit-transform: translate(0px, 202px);
     -moz-transform: translate(0px, 202px);
     transform: translate(0px, 202px); }
+  .tile.tile-position-2-0 {
+    -webkit-transform: translate(67px, -67px);
+    -moz-transform: translate(67px, -67px);
+    transform: translate(67px, -67px); }
   .tile.tile-position-2-1 {
     -webkit-transform: translate(67px, 0px);
     -moz-transform: translate(67px, 0px);
@@ -655,6 +710,10 @@ hr {
     -webkit-transform: translate(67px, 202px);
     -moz-transform: translate(67px, 202px);
     transform: translate(67px, 202px); }
+  .tile.tile-position-3-0 {
+    -webkit-transform: translate(135px, -67px);
+    -moz-transform: translate(135px, -67px);
+    transform: translate(135px, -67px); }
   .tile.tile-position-3-1 {
     -webkit-transform: translate(135px, 0px);
     -moz-transform: translate(135px, 0px);
@@ -671,6 +730,10 @@ hr {
     -webkit-transform: translate(135px, 202px);
     -moz-transform: translate(135px, 202px);
     transform: translate(135px, 202px); }
+  .tile.tile-position-4-0 {
+    -webkit-transform: translate(202px, -67px);
+    -moz-transform: translate(202px, -67px);
+    transform: translate(202px, -67px); }
   .tile.tile-position-4-1 {
     -webkit-transform: translate(202px, 0px);
     -moz-transform: translate(202px, 0px);
