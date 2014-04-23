@@ -129,69 +129,52 @@ initgame();
 
 var canvaswidth = gamewidth / (gameheight - 1);
 
-var game = $(".game");
-var tracks = [];
+var game = document.querySelector(".tile-container");
 var tiles = [];
-var record;
+var record = document.querySelector(".game-stat");
 
 function updatecanvas(success) {
-    var xsize = $(".main").height() - $(".title").outerHeight() - $(".info").outerHeight();
-    var unitwidth = Math.floor(xsize * canvaswidth / gamewidth);
-    var unitheight = Math.floor(xsize / (gameheight - 1));
-    var leftpos = Math.floor((game.width() - xsize * canvaswidth) / 2);
-
-    game.css({
-        top: $(".title").outerHeight() + "px",
-        height: unitheight * (gameheight - 1) + "px"
-    })
-
-    for (var i in tracks) {
-        tracks[i].css({
-            left: leftpos + unitwidth * parseInt(i) + "px",
-            width: unitwidth + "px"
-        });
-    }
-
     for (var i in tiles) {
         var unitpos = posnow - parseInt(i) + gameheight - 1;
 
-        tiles[i].stop().clearQueue();
-        tiles[i].css({
-            left: leftpos + unitwidth * poslist[Math.floor(unitpos / gameheight) * gameheight + parseInt(i)] + "px",
-            width: unitwidth + "px",
-            height: unitheight + "px"
-        });
+        var unitwidth = game.clientHeight / 4;
+        var unitheight = game.clientHeight / 4;
 
-        var anidata = {top: unitheight * (unitpos % gameheight - 1) + "px"};
+        var tilex = poslist[Math.floor(unitpos / gameheight) * gameheight + parseInt(i)];
+        var tiley = unitpos % gameheight - 1;
+
+        tilex++; tiley++;
 
         if (unitpos % gameheight > 0) {
-            tiles[i].animate(anidata, 100);
+            tiles[i].setAttribute("class", "tile tile-2048 tile-position-" + tilex + "-" + tiley);
+            tiles[i].innerHTML = "<div class=\"tile-inner\">2048</div>";
         } else {
-            tiles[i].css(anidata);
+            tiles[i].setAttribute("class", "tile tile-new tile-position-" + tilex + "-" + tiley);
+            tiles[i].innerHTML = "";
         }
 
-        if (success) {
-            tiles[i].fadeTo(0, 1);
-        } else {
-            tiles[i].fadeTo(0, 0.8).fadeTo(100, 1);
-        }
+        //tiles[i].style.left = (100 / gamewidth) * poslist[Math.floor(unitpos / gameheight) * gameheight + parseInt(i)] + "%";
+        //tiles[i].style.top = (100 / (gameheight - 1)) * (unitpos % gameheight - 1) + "%";
+
+        //if (unitpos % gameheight > 0) {
+        //    tiles[i].animate(anidata, 100);
+        //} else {
+        //    tiles[i].css(anidata);
+        //}
+
+        //if (success) {
     }
-
-    record.css({
-        left: leftpos + "px",
-        width: unitwidth * gamewidth + "px"
-    });
 
     var result = getresultwithsto();
 
-    record.text("");
+    record.innerHTML = "";
 
     for (var i in result.current) {
         var cu = result.current[i];
         var be = result.best[i];
         if (i[0] == "-" && cu == 999999) cu = "none";
         if (i[0] == "-" && be == 999999) be = "none";
-        $("<p />").text(i.substring(4, i.length) + " - " + cu + " / " + be).appendTo(record);
+        record.innerHTML += i.substring(4, i.length) + " - " + cu + " / " + be + "<br>";
     }
 }
 
@@ -200,45 +183,18 @@ function input(value) {
 }
 
 function initcanvas() {
-    $("body").delegate("*", "touchstart", function (e) {
-        if ($(this) !== $altNav) {
-            e.preventDefault();
-            return false;
-        }
-    });
-
-    for (var i = 0; i < gamewidth; ++i) {
-        var event = function (j){
-            return function (e){
-                e.preventDefault();
-                input(j);
-            };
-        }(i);
-
-        var track =
-            $("<div class=\"track\" />")
-                .append("<div class=\"frame\" />")
-                .appendTo(game);
-
-        track[0].addEventListener("click", event);
-        track[0].addEventListener("touchstart", event);
-
-        tracks.push(track);
-    }
+    //$("body").delegate("*", "touchstart", function (e) {
+    //    if ($(this) !== $altNav) {
+    //        e.preventDefault();
+    //        return false;
+    //    }
+    //});
 
     for (var i = 0; i < gameheight; ++i) {
-        tiles.push(
-            $("<div class=\"tile\">")
-                .append("<div class=\"fill\">")
-                .appendTo(game)
-        );
+        var elem = document.createElement("div");
+        game.appendChild(elem);
+        tiles.push(elem);
     }
-
-    record = $("<div class=\"record\" />").appendTo(game);
-    record.fadeTo(0, 0.4);
-
-    $(window).resize(updatecanvas);
-    $(window).load(updatecanvas);
 
     updatecanvas();
 }
@@ -255,9 +211,9 @@ var keymap = {
     90: 0, 88: 1, 67: 2, 86: 3, 66: 4, 78: 5, 77: 6, 188: 7, 190: 8, 191: 9
 }
 
-$(document).keydown(function (event) {
+document.onkeydown = function (event) {
     var value = keymap[event.which];
     if (value != undefined) input(value);
-});
+};
 
 ////////////////////////////////////////////////////////////////
