@@ -130,6 +130,8 @@ initgame();
 var canvaswidth = gamewidth / (gameheight - 1);
 
 var game = document.querySelector(".tile-container");
+var score_c = document.querySelector(".score-container");
+var best_c = document.querySelector(".best-container");
 var tiles = [];
 var record = document.querySelector(".game-stat");
 
@@ -175,6 +177,11 @@ function updatecanvas(success) {
         if (i[0] == "-" && cu == 999999) cu = "none";
         if (i[0] == "-" && be == 999999) be = "none";
         record.innerHTML += i.substring(4, i.length) + " - " + cu + " / " + be + "<br>";
+
+        if (i.substring(4, i.length) == "score") {
+            score_c.textContent = cu;
+            best_c.textContent = be;
+        }
     }
 }
 
