@@ -251,6 +251,7 @@ hr {
 
 .tile-container {
   position: absolute;
+  pointer-events: none;
   z-index: 2; }
 
 .tile, .tile .tile-inner {
@@ -348,7 +349,6 @@ hr {
   transition-property: transform; }
   .tile .tile-inner {
     border-radius: 3px;
-    background: #eee4da;
     text-align: center;
     font-weight: bold;
     z-index: 10;

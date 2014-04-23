@@ -139,19 +139,20 @@ function updatecanvas(success) {
     for (var i in tiles) {
         var unitpos = posnow - parseInt(i) + gameheight - 1;
 
-        var unitwidth = game.clientHeight / 4;
-        var unitheight = game.clientHeight / 4;
-
         var tilex = poslist[Math.floor(unitpos / gameheight) * gameheight + parseInt(i)];
         var tiley = unitpos % gameheight - 1;
 
         tilex++; tiley++;
 
         if (unitpos % gameheight > 0) {
-            tiles[i].setAttribute("class", "tile tile-2048 tile-position-" + tilex + "-" + tiley);
+            if (success) {
+                tiles[i].setAttribute("class", "tile tile-2048 tile-position-" + tilex + "-" + tiley);
+            } else {
+                tiles[i].setAttribute("class", "tile tile-new tile-2048 tile-position-" + tilex + "-" + tiley);
+            }
             tiles[i].innerHTML = "<div class=\"tile-inner\">2048</div>";
         } else {
-            tiles[i].setAttribute("class", "tile tile-new tile-position-" + tilex + "-" + tiley);
+            tiles[i].setAttribute("class", "tile tile-position-" + tilex + "-" + tiley);
             tiles[i].innerHTML = "";
         }
 
@@ -197,6 +198,21 @@ function initcanvas() {
     //    }
     //});
 
+    for (var i = 0; i < gamewidth; ++i) {
+        var event = function (j){
+            return function (e){
+                e.preventDefault();
+                input(j);
+            };
+        }(i);
+
+        for (var k = 0; k < gameheight - 1; ++k) {
+            var track = document.querySelector(".grid-cell-" + (parseInt(i) + 1) + "-" + (parseInt(k) + 1));
+            track.addEventListener("click", event);
+            track.addEventListener("touchstart", event);
+        }
+    }
+
     for (var i = 0; i < gameheight; ++i) {
         var elem = document.createElement("div");
         game.appendChild(elem);
@@ -212,10 +228,8 @@ initcanvas();
 // Input
 
 var keymap = {
-    49: 0, 50: 1, 51: 2, 52: 3, 53: 4, 54: 5, 55: 6, 56: 7, 57: 8, 48: 9, 173: 10, 61: 11,
-    81: 0, 87: 1, 69: 2, 82: 3, 84: 4, 89: 5, 85: 6, 73: 7, 79: 8, 80: 9, 219: 10, 221: 11,
-    65: 0, 83: 1, 68: 2, 70: 3, 71: 4, 72: 5, 74: 6, 75: 7, 76: 8, 59: 9, 222: 10,
-    90: 0, 88: 1, 67: 2, 86: 3, 66: 4, 78: 5, 77: 6, 188: 7, 190: 8, 191: 9
+    49: 0, 50: 1, 51: 2, 52: 3,
+    70: 0, 71: 1, 72: 2, 74: 3
 }
 
 document.onkeydown = function (event) {
