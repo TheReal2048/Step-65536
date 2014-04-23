@@ -155,17 +155,6 @@ function updatecanvas(success) {
             tiles[i].setAttribute("class", "tile tile-position-" + tilex + "-" + tiley);
             tiles[i].innerHTML = "";
         }
-
-        //tiles[i].style.left = (100 / gamewidth) * poslist[Math.floor(unitpos / gameheight) * gameheight + parseInt(i)] + "%";
-        //tiles[i].style.top = (100 / (gameheight - 1)) * (unitpos % gameheight - 1) + "%";
-
-        //if (unitpos % gameheight > 0) {
-        //    tiles[i].animate(anidata, 100);
-        //} else {
-        //    tiles[i].css(anidata);
-        //}
-
-        //if (success) {
     }
 
     var result = getresultwithsto();
@@ -191,13 +180,6 @@ function input(value) {
 }
 
 function initcanvas() {
-    //$("body").delegate("*", "touchstart", function (e) {
-    //    if ($(this) !== $altNav) {
-    //        e.preventDefault();
-    //        return false;
-    //    }
-    //});
-
     for (var i = 0; i < gamewidth; ++i) {
         var event = function (j){
             return function (e){
