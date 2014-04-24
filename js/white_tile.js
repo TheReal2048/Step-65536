@@ -216,6 +216,17 @@ function updatecanvas(success) {
     }
 }
 
+window.setInterval(function () {
+    var time = (new Date()).getTime();
+
+    // if > 1500ms, fail
+    if (time - timelist[timelist.length - 1] > 1500) {
+        timelist = [];
+        updateit(time);
+        updatecanvas(false);
+    }
+}, 20);
+
 function input(value) {
     updatecanvas(goahead(value));
 }
