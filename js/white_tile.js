@@ -150,8 +150,10 @@ function updatecanvas(success) {
         var con2x = Math.floor(Math.random() * gamewidth);
         var con2y = unitpos % gameheight - 1;
 
-        var conrate = 0.1 + 0.9 * getscore() / (getscore() + 150);
-        var conalpha = getscore() / (getscore() + 100);
+        var lastscore = getscore();
+
+        var conrate = 0.1 + 0.9 * lastscore / (lastscore + 200);
+        var conalpha = (lastscore > 50) ? (0.8 + lastscore / (lastscore + 200)) : (0.5 + lastscore / (lastscore + 50));
 
         tilex++; tiley++;
         conx++; cony++;
