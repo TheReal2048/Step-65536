@@ -134,6 +134,7 @@ var score_c = document.querySelector(".score-container");
 var best_c = document.querySelector(".best-container");
 var tiles = [];
 var confuse = [];
+var confuse2 = [];
 var record = document.querySelector(".game-stat");
 
 function updatecanvas(success) {
@@ -146,8 +147,14 @@ function updatecanvas(success) {
         var conx = Math.floor(Math.random() * gamewidth);
         var cony = unitpos % gameheight - 1;
 
+        var con2x = Math.floor(Math.random() * gamewidth);
+        var con2y = unitpos % gameheight - 1;
+
+        var conrate = 0.1 + 0.9 * getscore() / (getscore() + 64);
+
         tilex++; tiley++;
-        conx++; cony++
+        conx++; cony++;
+        con2x++; con2y++;
 
         if (unitpos % gameheight > 0) {
             if (success) {
@@ -170,10 +177,24 @@ function updatecanvas(success) {
                 confuse[i].setAttribute("class", "tile tile-new tile-" + val + " tile-position-" + conx + "-" + cony);
             }
             confuse[i].innerHTML = "<div class=\"tile-inner\">" + val + "</div>";
-            confuse[i].style.opacity = (conx == tilex || Math.random() > 0.25) ? 0 : tiles[i].style.opacity;
+            confuse[i].style.opacity = (conx == tilex || Math.random() > conrate) ? 0 : tiles[i].style.opacity;
         } else {
             confuse[i].setAttribute("class", "tile tile-position-" + tilex + "-" + tiley);
             confuse[i].innerHTML = "";
+        }
+
+        if (unitpos % gameheight > 0) {
+            var val = 2 << Math.floor(Math.random() * 10);
+            if (success) {
+                confuse2[i].setAttribute("class", "tile tile-" + val + " tile-position-" + con2x + "-" + con2y);
+            } else {
+                confuse2[i].setAttribute("class", "tile tile-new tile-" + val + " tile-position-" + con2x + "-" + con2y);
+            }
+            confuse2[i].innerHTML = "<div class=\"tile-inner\">" + val + "</div>";
+            confuse2[i].style.opacity = (con2x == tilex || con2x == conx || Math.random() > conrate) ? 0 : tiles[i].style.opacity;
+        } else {
+            confuse2[i].setAttribute("class", "tile tile-position-" + tilex + "-" + tiley);
+            confuse2[i].innerHTML = "";
         }
     }
 
@@ -225,6 +246,12 @@ function initcanvas() {
         var elem = document.createElement("div");
         game.appendChild(elem);
         confuse.push(elem);
+    }
+
+    for (var i = 0; i < gameheight; ++i) {
+        var elem = document.createElement("div");
+        game.appendChild(elem);
+        confuse2.push(elem);
     }
 
     updatecanvas();
