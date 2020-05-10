@@ -161,11 +161,11 @@ function updatecanvas(success) {
 
         if (unitpos % gameheight > 0) {
             if (success) {
-                tiles[i].setAttribute("class", "tile tile-top tile-2048 tile-position-" + tilex + "-" + tiley);
+                tiles[i].setAttribute("class", "tile tile-top tile-65536 tile-position-" + tilex + "-" + tiley);
             } else {
-                tiles[i].setAttribute("class", "tile tile-top tile-new tile-2048 tile-position-" + tilex + "-" + tiley);
+                tiles[i].setAttribute("class", "tile tile-top tile-new tile-65536 tile-position-" + tilex + "-" + tiley);
             }
-            tiles[i].innerHTML = "<div class=\"tile-inner\">2048</div>";
+            tiles[i].innerHTML = "<div class=\"tile-inner\">65536</div>";
             tiles[i].style.opacity = (tiley == 4) ? 1 : 0.5;
         } else {
             tiles[i].setAttribute("class", "tile tile-top tile-position-" + tilex + "-" + tiley);
